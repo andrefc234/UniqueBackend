@@ -1,27 +1,11 @@
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 
-const url =`${process.env.URI}`; 
+const uri = `mongodb+srv://uniquelivingqro1:P94YE2e2HwjDlYlU@uniqueliving.c3fx2cg.mongodb.net/?retryWrites=true&w=majority`;
 
-const dbName = 'UniqueLiving'; 
+const connectDB = async () => {
+  const conn = await mongoose.connect(uri)
 
-const client = new MongoClient(url);
-
-function connect(callback) {
-  client.connect(function (err) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    console.log('Connected successfully to server');
-
-    const db = client.db(dbName);
-
-    callback(null, db);
-  });
-}
-
-module.exports = {
-  connect: connect,
+  console.log(`MongoDB Connected: ${conn.connection.host}`);
 };
 
+module.exports = connectDB;
