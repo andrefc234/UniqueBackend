@@ -8,7 +8,7 @@ const obra = new mongoose.Schema({
     contactoF:{type:String},
     nombreCliente:{type:String},
     rfc:{type:String},
-    material:{type:[{nombre:String,progreso:{compras:String,contaduria:String},partida:String,cantidad:String}]},
+    
     curp:{type:String},
     direccionC:{type:String},
     telefono:{type:String},
