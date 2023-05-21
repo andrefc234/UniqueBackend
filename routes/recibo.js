@@ -11,7 +11,7 @@ const {
   getReciboNominaPersonaById,
   updateReciboNominaPersona,
   deleteReciboNominaPersona
-} = require('../controllers/recibo');
+} = require('../controller/recibo');
 
 // Routes for reciboNominaObra
 router.post('/obra', createReciboNominaObra);
