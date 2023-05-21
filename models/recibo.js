@@ -35,7 +35,7 @@ const reciboNominaObra = new mongoose.Schema({
     },
     diasTrabajados: {
       type: mongoose.Schema.Types.Mixed,
-      required: true
+      required: false
     }
   });
   
