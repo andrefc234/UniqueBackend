@@ -10,7 +10,7 @@ const reciboNominaObra = new mongoose.Schema({
 
   const reciboNominaPersona = new mongoose.Schema({
     date: {
-      type: date,
+      type: Date,
       required: true
     },
     nombre: {
