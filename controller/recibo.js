@@ -193,7 +193,52 @@ exports.updateReciboNominaPersona = async (req, res) => {
     });
   }
 };
+exports.getRecibosNominaObraByDate = async (req, res) => {
+  try {
+    const date = new Date(req.query.date);
+    const startOfDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const endOfDay = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
 
+    const recibosNominaObra = await ReciboO.find({
+      fecha: { $gte: startOfDay, $lt: endOfDay },
+    });
+
+    res.status(200).json({
+      success: true,
+      count: recibosNominaObra.length,
+      data: recibosNominaObra,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      error: 'Server Error',
+    });
+  }
+};
+exports.getRecibosNominaPersonaByDate = async (req, res) => {
+  try {
+    const date = new Date(req.query.date);
+    const startOfDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const endOfDay = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+
+    const recibosNominaPersona = await ReciboP.find({
+      date: { $gte: startOfDay, $lt: endOfDay },
+    });
+
+    res.status(200).json({
+      success: true,
+      count: recibosNominaPersona.length,
+      data: recibosNominaPersona,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      error: 'Server Error',
+    });
+  }
+};
 // Delete a reciboNominaPersona by id
 exports.deleteReciboNominaPersona = async (req, res) => {
   try {
