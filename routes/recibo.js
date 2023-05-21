@@ -1,20 +1,30 @@
 const express = require('express');
 const router = express.Router();
-const {createReciboNomina,getRecibosNomina,getReciboNominaById,updateReciboNomina,deleteReciboNomina} = require('../controller/recibo');
+const {
+  createReciboNominaObra,
+  getRecibosNominaObra,
+  getReciboNominaObraById,
+  updateReciboNominaObra,
+  deleteReciboNominaObra,
+  createReciboNominaPersona,
+  getRecibosNominaPersona,
+  getReciboNominaPersonaById,
+  updateReciboNominaPersona,
+  deleteReciboNominaPersona
+} = require('../controllers/recibo');
 
-// Create a new reciboNomina
-router.post('/', createReciboNomina);
+// Routes for reciboNominaObra
+router.post('/obra', createReciboNominaObra);
+router.get('/obra', getRecibosNominaObra);
+router.get('/obra/:id', getReciboNominaObraById);
+router.put('/obra/:id', updateReciboNominaObra);
+router.delete('/obra/:id', deleteReciboNominaObra);
 
-// Get all reciboNominas
-router.get('/', getRecibosNomina);
-
-// Get a single reciboNomina by ID
-router.get('/:id', getReciboNominaById);
-
-// Update a reciboNomina by ID
-router.put('/:id', updateReciboNomina);
-
-// Delete a reciboNomina by ID
-router.delete('/:id', deleteReciboNomina);
+// Routes for reciboNominaPersona
+router.post('/persona', createReciboNominaPersona);
+router.get('/persona', getRecibosNominaPersona);
+router.get('/persona/:id', getReciboNominaPersonaById);
+router.put('/persona/:id', updateReciboNominaPersona);
+router.delete('/persona/:id', deleteReciboNominaPersona);
 
 module.exports = router;
