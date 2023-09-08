@@ -33,7 +33,7 @@ exports.updateMaterialesPendientes = (req, res) => {
   const { id } = req.params;
   const { materialesPendientes } = req.body;
 
-  ObraList.findById(id, (err, obra) => {
+  Obra.findById(id, (err, obra) => {
     if (err) {
       return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
     }
