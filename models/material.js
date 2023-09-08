@@ -2,12 +2,8 @@ const mongoose = require('mongoose')
 
 
 const material = new mongoose.Schema({
-   P: {type:String},
-   Codigo:{type:String},
-   Descripcion:{type:String},
-   Tipo:{type:String},
+   Concepto:{type:String},
    Unidad:{type:String},
-   Costo:{type:String},
    Partida:{type:String}
   });
 const MaterialList = mongoose.model('Material', material);
