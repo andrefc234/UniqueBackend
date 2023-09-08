@@ -32,7 +32,7 @@ exports.createObra = async (req, res) => {
 exports.updateMaterialesPendientes = async (req, res) => {
   const { id } = req.params;
   const { materialesPendientes } = req.body;
-
+console.log(materialesPendientes)
   try {
     const obra = await Obra.findById(id);
 
