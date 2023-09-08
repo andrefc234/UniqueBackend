@@ -45,9 +45,9 @@ console.log(req.body)
       obra.materialesPendientes = [];
     }
 
-    if (Array.isArray(materialesPendientes) && materialesPendientes.length > 0) {
+    if (  materialesPendientes.length > 0) {
       // Use $push to add new items to the existing materialesPendientes array
-      obra.materialesPendientes.push(...materialesPendientes);
+      obra.materialesPendientes.push(...req.body);
     
       // Save the updated obra
       await obra.save();
