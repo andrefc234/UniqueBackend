@@ -7,7 +7,8 @@ const material = new mongoose.Schema({
    Descripcion:{type:String},
    Tipo:{type:String},
    Unidad:{type:String},
-   Costo:{type:String}
+   Costo:{type:String},
+   Partida:{type:String}
   });
 const MaterialList = mongoose.model('Material', material);
 module.exports = MaterialList

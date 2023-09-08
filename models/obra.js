@@ -12,7 +12,11 @@ const obra = new mongoose.Schema({
     curp:{type:String},
     direccionC:{type:String},
     telefono:{type:String},
-    idRequerimientos:{type:[{id:String}]}
+    idRequerimientos:{type:[{id:String}]},
+    materialesEntregados:{type:[{id:String}]},
+    materialesAprobados:{type:[{id:String}]},
+    materialesPendientes:{type:[{id:String}]}
+
   }); 
 const ObraList = mongoose.model('Obra', obra);
 module.exports = ObraList

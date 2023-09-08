@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 
 const requisicion = new mongoose.Schema({
-  obra: {type:String},
+  obraId: {type:String},
   material:{type:[{
     concepto:String,//obra
     unidad:String,//obra
