@@ -13,9 +13,9 @@ const obra = new mongoose.Schema({
     direccionC:{type:String},
     telefono:{type:String},
     idRequerimientos:{type:[{id:String}]},
-    materialesEntregados:{type:[{id:String}]},
-    materialesAprobados:{type:[{id:String}]},
-    materialesPendientes:{type:[{id:String}]}
+    materialesEntregados:{type:[{id:String,Concepto:String,Cantidad:String,Fecha:String,Partida:String}]},
+    materialesAprobados:{type:[{id:String,Concepto:String,Cantidad:String,Fecha:String,Partida:String}]},
+    materialesPendientes:{type:[{id:String,Concepto:String,Cantidad:String,Fecha:String,Partida:String}]}
 
   }); 
 const ObraList = mongoose.model('Obra', obra);
