@@ -40,7 +40,7 @@ exports.updateMaterialesPendientes = async (req, res) => {
       { materialesPendientes },
       { new: true }
     );
-
+      console.log(obra)
     if (!obra) {
       return res.status(404).json({ success: false, message: 'Obra not found' });
     }
