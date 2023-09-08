@@ -29,29 +29,26 @@ exports.createObra = async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 };
-exports.updateMaterialesPendientes = (req, res) => {
+exports.updateMaterialesPendientes = async (req, res) => {
   const { id } = req.params;
   const { materialesPendientes } = req.body;
 
-  Obra.findById(id, (err, obra) => {
-    if (err) {
-      return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
-    }
+  try {
+    // Update materialesPendientes in the Obra document
+    const obra = await Obra.findByIdAndUpdate(
+      id,
+      { materialesPendientes },
+      { new: true }
+    );
 
     if (!obra) {
       return res.status(404).json({ success: false, message: 'Obra not found' });
     }
 
-    obra.materialesPendientes = materialesPendientes;
-
-    obra.save((err) => {
-      if (err) {
-        return res.status(500).json({ success: false, message: 'Error updating materiales pendientes', error: err });
-      }
-
-      return res.status(200).json({ success: true, message: 'Materiales pendientes updated successfully' });
-    });
-  });
+    return res.status(200).json({ success: true, message: 'Materiales pendientes updated successfully' });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: 'Error updating materiales pendientes', error });
+  }
 };
 exports.updateObra = async (req, res) => {
   try {
