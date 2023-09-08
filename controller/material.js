@@ -7,7 +7,7 @@ exports.uploadMaterialList = async (req, res) => {
   console.log(req.body)
    const material = await MaterialList.create(req.body)
    
-   res.status(200).json({
+   res.status(201).json({
     success:true,data:material
 })
   };
