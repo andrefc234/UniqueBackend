@@ -34,22 +34,24 @@ exports.updateMaterialesPendientes = async (req, res) => {
   const { materialesPendientes } = req.body;
 
   try {
-    // Update materialesPendientes in the Obra document
-    const obra = await Obra.findByIdAndUpdate(
-      id,
-      { materialesPendientes },
-      { new: true }
-    );
-      console.log(obra)
+    const obra = await Obra.findById(id);
+
     if (!obra) {
       return res.status(404).json({ success: false, message: 'Obra not found' });
     }
+
+    // Use $push to add new items to the existing materialesPendientes array
+    obra.materialesPendientes.push(...materialesPendientes);
+
+    // Save the updated obra
+    await obra.save();
 
     return res.status(200).json({ success: true, message: 'Materiales pendientes updated successfully' });
   } catch (error) {
     return res.status(500).json({ success: false, message: 'Error updating materiales pendientes', error });
   }
 };
+
 exports.updateObra = async (req, res) => {
   try {
     const obra = await Obra.findByIdAndUpdate(req.params.id, req.body, {
