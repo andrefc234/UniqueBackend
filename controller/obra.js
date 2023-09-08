@@ -29,7 +29,30 @@ exports.createObra = async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 };
+exports.updateMaterialesPendientes = (req, res) => {
+  const { id } = req.params;
+  const { materialesPendientes } = req.body;
 
+  ObraList.findById(id, (err, obra) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
+    }
+
+    if (!obra) {
+      return res.status(404).json({ success: false, message: 'Obra not found' });
+    }
+
+    obra.materialesPendientes = materialesPendientes;
+
+    obra.save((err) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: 'Error updating materiales pendientes', error: err });
+      }
+
+      return res.status(200).json({ success: true, message: 'Materiales pendientes updated successfully' });
+    });
+  });
+};
 exports.updateObra = async (req, res) => {
   try {
     const obra = await Obra.findByIdAndUpdate(req.params.id, req.body, {

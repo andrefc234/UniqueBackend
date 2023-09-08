@@ -7,6 +7,7 @@ const {
   updateObra,
   deleteObra,
   addIdRequerimiento,
+  updateMaterialesPendientes
 } = require('../controller/obra');
 
 router.get('/', getObras);
@@ -15,5 +16,5 @@ router.post('/', createObra);
 router.put('/:id', updateObra);
 router.delete('/:id', deleteObra);
 router.put('/requerimientos/:id', addIdRequerimiento);
-
+router.post('/materialesPendientes/:id', updateMaterialesPendientes);
 module.exports = router;
