@@ -47,7 +47,7 @@ console.log(req.body)
 
     if (  materialesPendientes.length > 0) {
       // Use $push to add new items to the existing materialesPendientes array
-      obra.materialesPendientes.push(...req.body);
+      obra.materialesPendientes.push(...req.body.materialesPendientes);
     
       // Save the updated obra
       await obra.save();
