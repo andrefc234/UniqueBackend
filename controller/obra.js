@@ -55,6 +55,7 @@ console.log(req.body)
 
     return res.status(200).json({ success: true, message: obra });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ success: false, message: 'Error updating materiales pendientes', error });
   }
 };
