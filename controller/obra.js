@@ -59,8 +59,8 @@ exports.updateMaterialesPendientes = async (req, res) => {
     return res.status(500).json({ success: false, message: 'Error updating materiales pendientes', error });
   }
 };
-exports.removeMaterialesAprobados = async (req, res) => {
-  const { id, materialAprobadoId } = req.params;
+exports.removeMaterialesPendientes = async (req, res) => {
+  const { id, materialesPendientesId } = req.params;
 
   try {
     const obra = await Obra.findById(id);
@@ -69,12 +69,12 @@ exports.removeMaterialesAprobados = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Obra not found' });
     }
 
-    if (!obra.materialesAprobados || obra.materialesAprobados.length === 0) {
+    if (!obra.materialesPendientes || obra.materialesPendientes.length === 0) {
       return res.status(400).json({ success: false, message: 'No materiales aprobados found' });
     }
 
-    // Use $pull to remove the specified materialAprobadoId from the array
-    obra.materialesAprobados = obra.materialesAprobados.filter((ma) => ma.id !== materialAprobadoId);
+    // Use $pull to remove the specified materialesPendientesId from the array
+    obra.materialesPendientes = obra.materialesPendientes.filter((ma) => ma.id !== materialesPendientesId);
 
     // Save the updated obra
     await obra.save();
