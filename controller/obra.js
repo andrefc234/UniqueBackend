@@ -29,10 +29,9 @@ exports.createObra = async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 };
-exports.updateMaterialesPendientes = async (req, res) => {
-  const { id } = req.params;
-  const { materialesPendientes } = req.body;
-  console.log(req.body)
+exports.removeMaterialPendiente = async (req, res) => {
+  const { id, materialPendienteId } = req.params;
+
   try {
     const obra = await Obra.findById(id);
 
@@ -40,23 +39,22 @@ exports.updateMaterialesPendientes = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Obra not found' });
     }
 
-    if (!obra.materialesPendientes) {
-      // If materialesPendientes is undefined or missing, initialize it as an empty array
-      obra.materialesPendientes = [];
+    if (!obra.materialesPendientes || obra.materialesPendientes.length === 0) {
+      return res.status(400).json({ success: false, message: 'No materiales pendientes found' });
     }
 
-    if (  materialesPendientes.length > 0) {
-      // Use $push to add new items to the existing materialesPendientes array
-      obra.materialesPendientes.push(...req.body.materialesPendientes);
-    
-      // Save the updated obra
-      await obra.save();
-    }
+    // Use filter to remove the specified materialPendienteId from the array
+    obra.materialesPendientes = obra.materialesPendientes.filter(
+      (material) => material.id !== materialPendienteId
+    );
 
-    return res.status(200).json({ success: true, message: obra });
+    // Save the updated obra
+    await obra.save();
+
+    return res.status(200).json({ success: true, message: 'Material pendiente removed', obra });
   } catch (error) {
-    console.log(error)
-    return res.status(500).json({ success: false, message: 'Error updating materiales pendientes', error });
+    console.error(error);
+    return res.status(500).json({ success: false, message: 'Error removing material pendiente', error });
   }
 };
 
