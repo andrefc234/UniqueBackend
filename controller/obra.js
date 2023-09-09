@@ -59,23 +59,17 @@ exports.removeMaterialesPendientes = async (req, res) => {
   const { id, materialPendientesId } = req.params;
 
   try {
-    const obra = await Obra.findById(id);
+    const obra = await Obra.findByIdAndUpdate(
+      id,
+      {
+        $pull: { materialesPendientes: { _id: new ObjectId(materialPendientesId) } },
+      },
+      { new: true }
+    );
 
     if (!obra) {
       return res.status(404).json({ success: false, message: 'Obra not found' });
     }
-
-    if (!obra.materialesPendientes || obra.materialesPendientes.length === 0) {
-      return res.status(400).json({ success: false, message: 'No materiales pendientes found' });
-    }
-
-    // Use filter to remove the specified materialPendientesId from the array
-    obra.materialesPendientes = obra.materialesPendientes.filter(
-      (material) => material.id !== materialPendientesId
-    );
-console.log(obra.materialesPendientes)
-    // Save the updated obra
-    await obra.save();
 
     return res.status(200).json({ success: true, message: 'Material pendiente removed', obra });
   } catch (error) {
