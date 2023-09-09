@@ -68,12 +68,12 @@ exports.removeMaterialesPendientes = async (req, res) => {
     if (!obra.materialesPendientes || obra.materialesPendientes.length === 0) {
       return res.status(400).json({ success: false, message: 'No materiales pendientes found' });
     }
-console.log()
+
     // Use filter to remove the specified materialPendientesId from the array
     obra.materialesPendientes = obra.materialesPendientes.filter(
       (material) => material.id !== materialPendientesId
     );
-
+console.log(obra.materialesPendientes)
     // Save the updated obra
     await obra.save();
 
