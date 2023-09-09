@@ -8,7 +8,7 @@ const {
   deleteObra,
   addIdRequerimiento,
   updateMaterialesPendientes,
-  removeMaterialesPendientes
+ 
 } = require('../controller/obra');
 
 router.get('/', getObras);

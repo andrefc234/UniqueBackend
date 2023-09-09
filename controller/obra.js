@@ -30,6 +30,30 @@ exports.createObra = async (req, res) => {
   }
 };
 
+exports.updateMaterialesPendientes = (req, res) => {
+  const { id } = req.params;
+  const { materialesPendientes } = req.body;
+
+  ObraList.findById(id, (err, obra) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
+    }
+
+    if (!obra) {
+      return res.status(404).json({ success: false, message: 'Obra not found' });
+    }
+
+    obra.materialesPendientes = materialesPendientes;
+
+    obra.save((err) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: 'Error updating materiales pendientes', error: err });
+      }
+
+      return res.status(200).json({ success: true, message: 'Materiales pendientes updated successfully' });
+    });
+  });
+};
 
 exports.removeMaterialesPendientes = async (req, res) => {
   const { id, materialPendientesId } = req.params;
@@ -44,7 +68,7 @@ exports.removeMaterialesPendientes = async (req, res) => {
     if (!obra.materialesPendientes || obra.materialesPendientes.length === 0) {
       return res.status(400).json({ success: false, message: 'No materiales pendientes found' });
     }
-console.log(obra)
+console.log()
     // Use filter to remove the specified materialPendientesId from the array
     obra.materialesPendientes = obra.materialesPendientes.filter(
       (material) => material.id !== materialPendientesId
