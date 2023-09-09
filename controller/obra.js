@@ -31,7 +31,7 @@ exports.createObra = async (req, res) => {
 };
 exports.removeMaterialPendiente = async (req, res) => {
   const { id, materialPendienteId } = req.params;
-
+console.log(req.params)
   try {
     const obra = await Obra.findById(id);
 
