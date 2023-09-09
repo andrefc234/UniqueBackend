@@ -32,7 +32,7 @@ exports.createObra = async (req, res) => {
 exports.updateMaterialesPendientes = async (req, res) => {
   const { id } = req.params;
   const { materialesPendientes } = req.body;
-console.log(req.body)
+  console.log(req.body)
   try {
     const obra = await Obra.findById(id);
 
@@ -59,6 +59,7 @@ console.log(req.body)
     return res.status(500).json({ success: false, message: 'Error updating materiales pendientes', error });
   }
 };
+
 
 exports.updateObra = async (req, res) => {
   try {

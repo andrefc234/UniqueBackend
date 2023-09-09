@@ -7,8 +7,7 @@ const obra = new mongoose.Schema({
     metrosT:{type:String},
     contactoF:{type:String},
     nombreCliente:{type:String},
-    rfc:{type:String},
-    
+    rfc:{type:String},    
     curp:{type:String},
     direccionC:{type:String},
     telefono:{type:String},
@@ -16,7 +15,6 @@ const obra = new mongoose.Schema({
     materialesEntregados:{type:[{id:String,Concepto:String,Cantidad:String,Fecha:String,Partida:String}]},
     materialesAprobados:{type:[{id:String,Concepto:String,Cantidad:String,Fecha:String,Partida:String}]},
     materialesPendientes:{type:[{id:String,Concepto:String,Cantidad:String,Fecha:String,Partida:String}]}
-
   }); 
 const ObraList = mongoose.model('Obra', obra);
 module.exports = ObraList
