@@ -18,5 +18,5 @@ router.put('/:id', updateObra);
 router.delete('/:id', deleteObra);
 router.put('/requerimientos/:id', addIdRequerimiento);
 router.post('/materialesPendientes/:id', updateMaterialesPendientes);
-router.post('/obra/:id/materialesPendientes/:materialPendientesId', removeMaterialesPendientes);
+router.delete('/obra/:id/materialesPendientes/:materialPendientesId', removeMaterialesPendientes);
 module.exports = router;
