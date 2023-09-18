@@ -54,6 +54,30 @@ exports.updateMaterialesPendientes = (req, res) => {
     });
   });
 };
+exports.updateMaterialesAprobados = (req, res) => {
+  const { id } = req.params;
+  const { materialesAprobados } = req.body;
+
+  Obra.findById(id, (err, obra) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
+    }
+
+    if (!obra) {
+      return res.status(404).json({ success: false, message: 'Obra not found' });
+    }
+
+    obra.materialesAprobados = materialesAprobados;
+
+    obra.save((err) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: 'Error updating materiales aprobados', error: err });
+      }
+
+      return res.status(200).json({ success: true, message: 'Materiales aprobados updated successfully' });
+    });
+  });
+};
 
 exports.removeMaterialesPendientes = async (req, res) => {
   const { id, materialPendientesId } = req.params;

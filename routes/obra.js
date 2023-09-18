@@ -8,7 +8,8 @@ const {
   deleteObra,
   addIdRequerimiento,
   updateMaterialesPendientes,
-  removeMaterialesPendientes
+  removeMaterialesPendientes,
+  updateMaterialesAprobados
 } = require('../controller/obra');
 
 router.get('/', getObras);
@@ -18,5 +19,7 @@ router.put('/:id', updateObra);
 router.delete('/:id', deleteObra);
 router.put('/requerimientos/:id', addIdRequerimiento);
 router.post('/materialesPendientes/:id', updateMaterialesPendientes);
+router.post('/materialesAprobados/:id', updateMaterialesAprobados);
+
 router.delete('/obra/:id/materialesPendientes/:materialPendientesId', removeMaterialesPendientes);
 module.exports = router;
