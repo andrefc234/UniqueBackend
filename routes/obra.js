@@ -23,7 +23,7 @@ router.put('/requerimientos/:id', addIdRequerimiento);
 router.post('/materialesPendientes/:id', updateMaterialesPendientes);
 // Define the route for removing materials from materialesAprobados
 router.delete('/obra/:id/materialesAprobados/:materialAprobadoId', removeMaterialesAprobados);
-router.put('/obra/:id/materialesEntregados', updateMaterialesEntregados);
+router.put('/:id/materialesEntregados', updateMaterialesEntregados);
 
 router.delete('/obra/:id/materialesPendientes/:materialPendientesId', removeMaterialesPendientes);
 router.put('/ob/Aprobados/:id', updateMaterialesAprobados);
