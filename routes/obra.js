@@ -21,5 +21,5 @@ router.put('/requerimientos/:id', addIdRequerimiento);
 router.post('/materialesPendientes/:id', updateMaterialesPendientes);
 
 router.delete('/obra/:id/materialesPendientes/:materialPendientesId', removeMaterialesPendientes);
-router.post('/Aprobados/:id', updateMaterialesAprobados);
+router.put('/Aprobados/:id', updateMaterialesAprobados);
 module.exports = router;
