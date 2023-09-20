@@ -56,7 +56,7 @@ exports.updateMaterialesPendientes = (req, res) => {
 exports.updateMaterialesAprobados = (req, res) => {
   const { id } = req.params;
   const { materialesAprobados } = req.body;
-console.log(req.body)
+
   Obra.findById(id, (err, obra) => {
     if (err) {
       return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
@@ -66,7 +66,8 @@ console.log(req.body)
       return res.status(404).json({ success: false, message: 'Obra not found' });
     }
 
-    obra.materialesAprobados = materialesAprobados;
+    // Use the $push operator to add new materials to the existing array
+    obra.materialesAprobados.push(...materialesAprobados);
 
     obra.save((err) => {
       if (err) {
@@ -77,14 +78,15 @@ console.log(req.body)
     });
   });
 };
+
 exports.updateMaterialesEntregados = async (req, res) => {
   const { id } = req.params;
   const { materialesEntregados } = req.body;
-  console.log(materialesEntregados)
+  
   try {
     const obra = await Obra.findByIdAndUpdate(
       id,
-      { materialesEntregados },
+      { $push: { materialesEntregados: { $each: materialesEntregados } } }, // Use $push and $each to append new materials
       { new: true }
     );
 
@@ -98,6 +100,7 @@ exports.updateMaterialesEntregados = async (req, res) => {
     return res.status(500).json({ success: false, message: 'Error updating materiales entregados', error });
   }
 };
+
 exports.removeMaterialesAprobados = async (req, res) => {
   const { id, materialAprobadoId } = req.params;
 
