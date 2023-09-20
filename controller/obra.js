@@ -82,7 +82,7 @@ exports.updateMaterialesAprobados = (req, res) => {
 exports.updateMaterialesEntregados = (req, res) => {
   const { id } = req.params;
   const { materialesEntregados } = req.body;
-
+  console.log(req.params)
   Obra.findById(id, (err, obra) => {
     if (err) {
       return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
