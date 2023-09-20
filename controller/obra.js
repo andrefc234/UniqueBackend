@@ -52,7 +52,6 @@ exports.updateMaterialesPendientes = (req, res) => {
     });
   });
 };
-
 exports.updateMaterialesAprobados = (req, res) => {
   const { id } = req.params;
   const { materialesAprobados } = req.body;
@@ -78,11 +77,10 @@ exports.updateMaterialesAprobados = (req, res) => {
     });
   });
 };
-
 exports.updateMaterialesEntregados = (req, res) => {
   const { id } = req.params;
   const { materialesEntregados } = req.body;
-  console.log(req.params)
+  console.log(req.body)
   Obra.findById(id, (err, obra) => {
     if (err) {
       return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
@@ -100,8 +98,6 @@ exports.updateMaterialesEntregados = (req, res) => {
     });
   });
 };
-
-
 exports.removeMaterialesAprobados = async (req, res) => {
   const { id, materialAprobadoId } = req.params;
 
