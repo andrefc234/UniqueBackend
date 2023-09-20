@@ -78,7 +78,7 @@ console.log(req.body)
 exports.updateMaterialesEntregados = async (req, res) => {
   const { id } = req.params;
   const { materialesEntregados } = req.body;
-
+console.log(materialesEntregados)
   try {
     const obra = await Obra.findByIdAndUpdate(
       id,
