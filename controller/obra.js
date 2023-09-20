@@ -8,7 +8,6 @@ exports.getObras = async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 };
-
 exports.getObra = async (req, res) => {
   try {
     const obra = await Obra.findById(req.params.id);
@@ -20,7 +19,6 @@ exports.getObra = async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 };
-
 exports.createObra = async (req, res) => {
   try {
     const obra = await Obra.create(req.body);
@@ -29,7 +27,6 @@ exports.createObra = async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 };
-
 exports.updateMaterialesPendientes = (req, res) => {
   const { id } = req.params;
   const { materialesPendientes } = req.body;
@@ -57,7 +54,7 @@ exports.updateMaterialesPendientes = (req, res) => {
 exports.updateMaterialesAprobados = (req, res) => {
   const { id } = req.params;
   const { materialesAprobados } = req.body;
-  console.log(req.params)
+console.log(req.body)
   Obra.findById(id, (err, obra) => {
     if (err) {
       return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
@@ -78,7 +75,27 @@ exports.updateMaterialesAprobados = (req, res) => {
     });
   });
 };
+exports.updateMaterialesEntregados = async (req, res) => {
+  const { id } = req.params;
+  const { materialesEntregados } = req.body;
 
+  try {
+    const obra = await Obra.findByIdAndUpdate(
+      id,
+      { materialesEntregados },
+      { new: true }
+    );
+
+    if (!obra) {
+      return res.status(404).json({ success: false, message: 'Obra not found' });
+    }
+
+    return res.status(200).json({ success: true, message: 'Materiales entregados updated successfully', obra });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: 'Error updating materiales entregados', error });
+  }
+};
 exports.removeMaterialesAprobados = async (req, res) => {
   const { id, materialAprobadoId } = req.params;
 
@@ -101,7 +118,6 @@ exports.removeMaterialesAprobados = async (req, res) => {
     return res.status(500).json({ success: false, message: 'Error removing material aprobado', error });
   }
 };
-
 exports.removeMaterialesPendientes = async (req, res) => {
   const { id, materialPendientesId } = req.params;
 
@@ -124,8 +140,6 @@ exports.removeMaterialesPendientes = async (req, res) => {
     return res.status(500).json({ success: false, message: 'Error removing material pendiente', error });
   }
 };
-
-
 exports.updateObra = async (req, res) => {
   try {
     const obra = await Obra.findByIdAndUpdate(req.params.id, req.body, {
@@ -139,7 +153,6 @@ exports.updateObra = async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 };
-
 exports.deleteObra = async (req, res) => {
   try {
     const obra = await Obra.findByIdAndRemove(req.params.id);
@@ -151,7 +164,6 @@ exports.deleteObra = async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 };
-
 exports.addIdRequerimiento = async (req, res) => {
   const obraId = req.params.id;
   const requerimientoId = req.body.requerimientoId;
