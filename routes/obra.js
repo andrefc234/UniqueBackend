@@ -9,7 +9,8 @@ const {
   addIdRequerimiento,
   updateMaterialesPendientes,
   removeMaterialesPendientes,
-  updateMaterialesAprobados
+  updateMaterialesAprobados,
+  removeMaterialesAprobados
 } = require('../controller/obra');
 
 router.get('/', getObras);
