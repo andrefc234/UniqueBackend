@@ -57,7 +57,7 @@ exports.updateMaterialesPendientes = (req, res) => {
 exports.updateMaterialesAprobados = (req, res) => {
   const { id } = req.params;
   const { materialesAprobados } = req.body;
-console.log(req.params)
+  console.log(req.params)
   Obra.findById(id, (err, obra) => {
     if (err) {
       return res.status(500).json({ success: false, message: 'Error finding obra', error: err });
@@ -77,6 +77,29 @@ console.log(req.params)
       return res.status(200).json({ success: true, message: 'Materiales aprobados updated successfully' });
     });
   });
+};
+
+exports.removeMaterialesAprobados = async (req, res) => {
+  const { id, materialAprobadoId } = req.params;
+
+  try {
+    const obra = await Obra.findByIdAndUpdate(
+      id,
+      {
+        $pull: { materialesAprobados: { _id: new ObjectId(materialAprobadoId) } },
+      },
+      { new: true }
+    );
+
+    if (!obra) {
+      return res.status(404).json({ success: false, message: 'Obra not found' });
+    }
+
+    return res.status(200).json({ success: true, message: 'Material aprobado removed', obra });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: 'Error removing material aprobado', error });
+  }
 };
 
 exports.removeMaterialesPendientes = async (req, res) => {
