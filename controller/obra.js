@@ -40,7 +40,8 @@ exports.updateMaterialesPendientes = (req, res) => {
       return res.status(404).json({ success: false, message: 'Obra not found' });
     }
 
-    obra.materialesPendientes = materialesPendientes;
+    // Use the $push operator to add new materials to the existing array
+    obra.materialesPendientes.push(...materialesPendientes);
 
     obra.save((err) => {
       if (err) {
@@ -51,6 +52,7 @@ exports.updateMaterialesPendientes = (req, res) => {
     });
   });
 };
+
 exports.updateMaterialesAprobados = (req, res) => {
   const { id } = req.params;
   const { materialesAprobados } = req.body;
