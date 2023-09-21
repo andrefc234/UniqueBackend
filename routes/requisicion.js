@@ -10,5 +10,5 @@ router.route('/:id')
   .get(getRequisicionById)
   .put(updateRequisicion)
   .delete(deleteRequisicion);
-
+router.post('/upload/:requisicionId', uploadPDF);
 module.exports = router;

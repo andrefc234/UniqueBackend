@@ -80,6 +80,34 @@ exports.updateRequisicion = async (req, res) => {
     });
   }
 };
+exports.uploadPDF = async (req, res) => {
+  try {
+    const { requisicionId } = req.params;
+    const requisicion = await RequisicionList.findById(requisicionId);
+
+    if (!requisicion) {
+      return res.status(404).json({ success: false, message: 'Requisicion not found' });
+    }
+
+    // Access uploaded file information
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json({ success: false, message: 'No file uploaded' });
+    }
+
+    // Store file data, content type, and file name in requisicion
+    requisicion.pdf.data = file.buffer;
+    requisicion.pdf.contentType = file.mimetype;
+    requisicion.pdf.fileName = file.originalname;
+
+    await requisicion.save();
+
+    return res.status(200).json({ success: true, message: 'PDF uploaded successfully' });
+  } catch (error) {
+    console.error('Error uploading PDF:', error);
+    return res.status(500).json({ success: false, message: 'Error uploading PDF', error: error });
+  }
+};
 
 exports.deleteRequisicion = async (req, res) => {
   try {

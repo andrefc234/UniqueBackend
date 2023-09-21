@@ -7,7 +7,12 @@ const requisicion = new mongoose.Schema({
     Cantidad:Number,//obra
   }]},
   aceptado:{type:Boolean},
-  fecha:{type:String}
+  fecha:{type:String},
+  pdf: {
+    data: Buffer, // Stores the file data
+    contentType: String, // Stores the content type (e.g., 'application/pdf')
+    fileName: String, // Stores the file name
+  },
 });
 const RequisicionList = mongoose.model('Requisicion', requisicion);
 module.exports = {
