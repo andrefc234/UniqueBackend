@@ -1,4 +1,4 @@
-const Factura = require('../models/Factura');
+const Factura = require('../models/factura');
 
 // Create a new Factura
 exports.createFactura = async (req, res) => {
