@@ -6,7 +6,7 @@ const {
   getFacturaById,
   updateFacturaById,
   deleteFacturaById,
-} = require('../controllers/factura');
+} = require('../controller/factura');
 
 // Routes for Factura
 router.post('/factura', createFactura);
