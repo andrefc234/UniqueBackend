@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const requisicion = new mongoose.Schema({
   obraId: {type:String},
+  nombreObra:{type:String},
   material:{type:[{
     Concepto:String,//obra
     Unidad:String,//obra
