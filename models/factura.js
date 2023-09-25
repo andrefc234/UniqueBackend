@@ -9,7 +9,7 @@ const FacturaModel = new mongoose.Schema({
     {
       Concepto: { type: String },
       Cantidad: { type: String },
-      Partida: { type: String },
+      
     },
   ],
   banco: { type: String, required: true },
