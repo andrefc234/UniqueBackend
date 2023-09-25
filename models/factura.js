@@ -5,7 +5,7 @@ const FacturaModel = new mongoose.Schema({
   nombreObra:{type:String},
   idObra:{type:String},
   fecha: { type: Date, required: true },
-  factura: { type: String, required: false },
+ 
   importe: { type: Number, required: true },
   provedor: { type: String, required: true },
   material: [
