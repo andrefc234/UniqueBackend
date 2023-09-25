@@ -9,10 +9,10 @@ const {
 } = require('../controller/factura');
 
 // Routes for Factura
-router.post('/factura', createFactura);
-router.get('/factura', getAllFacturas);
-router.get('/factura/:id', getFacturaById);
-router.put('/factura/:id', updateFacturaById);
-router.delete('/factura/:id', deleteFacturaById);
+router.post('/', createFactura);
+router.get('/', getAllFacturas);
+router.get('/:id', getFacturaById);
+router.put('/:id', updateFacturaById);
+router.delete('/:id', deleteFacturaById);
 
 module.exports = router;
