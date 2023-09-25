@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const FacturaModel = new mongoose.Schema({
+  idrequsicion:{type:String},
+  nombreObra:{type:String},
+  idObra:{type:String},
   fecha: { type: Date, required: true },
   factura: { type: String, required: false },
   importe: { type: Number, required: true },
