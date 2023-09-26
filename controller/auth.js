@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+
 const User = require('../models/user');
 // @desc      Register user
 // @route     POST /api/v1/auth/register
@@ -126,21 +127,22 @@ exports.getUser = async (req,res,next) => {
   const users = await User.find()
   res.status(200).json({succes:true, data:users})
 }
-const sendTokenResponse = (user, statusCode, res) => {
-  const jwtsecret = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY1NjYxNDE4MCwiaWF0IjoxNjU2NjE0MTgwfQ.k3oi-VVFuWP45NVlPcMdosiyxmYmjK6Olse6UDK679g'; // Your JWT secret
 
+const JWT_SECRET = process.env.JWT_SECRET || 'your-default-secret'; // Use an environment variable for JWT secret
+
+const sendTokenResponse = (user, statusCode, res) => {
   // Create token
-  const token = jwt.sign({ clave: user }, jwtsecret, {
+  const token = jwt.sign({ clave: user }, JWT_SECRET, {
     expiresIn: '5h',
   });
 
   const options = {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-    secure: true, // Set the secure flag to true
+    secure: process.env.NODE_ENV === 'production', // Set the secure flag based on environment
     httpOnly: true,
     // You can also set the 'sameSite' option to 'None' if needed
   };
-console.log(token)
+
   res
     .status(statusCode)
     .cookie('token', token, options)
@@ -149,4 +151,6 @@ console.log(token)
       token,
     });
 };
+
+module.exports = sendTokenResponse;
 
