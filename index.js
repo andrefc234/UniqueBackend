@@ -10,6 +10,7 @@ const requisicion = require('./routes/requisicion')
 const recibo = require('./routes/recibo')
 const entregaR = require('./routes/entregaR')
 const factura = require('./routes/factura')
+const auth = require('./routes/auth')
 app.use(express.json());
 const PORT = 5000;
 connectDB()
@@ -34,6 +35,7 @@ app.use('/api/v1/requisicion',requisicion)
 app.use('/api/v1/recibo',recibo)
 app.use('/api/v1/entregaR',entregaR)
 app.use('/api/v1/factura',factura)
+app.use('/api/v1/auth',auth)
 const server = app.listen(
   PORT,
   console.log(
