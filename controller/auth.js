@@ -139,7 +139,7 @@ console.log(token)
   const options = {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     secure: process.env.NODE_ENV === 'production', // Set the secure flag based on environment
-    httpOnly: true,
+    httpOnly: false,
     // You can also set the 'sameSite' option to 'None' if needed
   };
 
