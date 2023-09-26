@@ -45,7 +45,7 @@ exports.login = async (req, res, next) => {
   if (!isMatch) {
     return res.status(401);
   }
-
+console.log(jwtuserst)
   sendTokenResponse(jwtuserst, 200, res)
 }
 // @desc      Log user out / clear cookie
