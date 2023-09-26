@@ -128,7 +128,7 @@ exports.getUser = async (req,res,next) => {
   res.status(200).json({succes:true, data:users})
 }
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-default-secret'; // Use an environment variable for JWT secret
+const JWT_SECRET = process.env.JWT_SECRET ; // Use an environment variable for JWT secret
 
 const sendTokenResponse = (user, statusCode, res) => {
   // Create token
