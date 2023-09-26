@@ -135,7 +135,7 @@ const sendTokenResponse = (user, statusCode, res) => {
   const token = jwt.sign({ clave: user }, JWT_SECRET, {
     expiresIn: '5h',
   });
-
+console.log(token)
   const options = {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     secure: process.env.NODE_ENV === 'production', // Set the secure flag based on environment
