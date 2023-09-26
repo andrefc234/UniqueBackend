@@ -140,7 +140,7 @@ const sendTokenResponse = (user, statusCode, res) => {
     httpOnly: true,
     // You can also set the 'sameSite' option to 'None' if needed
   };
-
+console.log(token)
   res
     .status(statusCode)
     .cookie('token', token, options)
