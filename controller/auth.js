@@ -152,5 +152,5 @@ const sendTokenResponse = (user, statusCode, res) => {
     });
 };
 
-module.exports = sendTokenResponse;
+
 
