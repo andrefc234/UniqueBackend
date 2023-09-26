@@ -24,7 +24,7 @@ exports.register = async (req, res, next) => {
 // @access    Public
 exports.login = async (req, res, next) => {
   const { clave, password } = req.body;
-
+  console.log(req.body)
   // Validate emil & password
   if (!clave || !password) {
     return res.status(401);
