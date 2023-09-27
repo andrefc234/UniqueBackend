@@ -48,7 +48,7 @@ exports.login = async (req, res, next) => {
     if (!isMatch) {
       return res.status(401).json({ success: false, message: 'Invalid credentials.' });
     }
-
+console.log(isMatch)
     sendTokenResponse(clave, 200, res);
   } catch (error) {
     console.error(error);
