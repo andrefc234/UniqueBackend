@@ -23,32 +23,39 @@ exports.register = async (req, res, next) => {
 // @desc      Login user
 // @route     POST /api/v1/auth/login
 // @access    Public
+// @desc      Login user
+// @route     POST /api/v1/auth/login
+// @access    Public
 exports.login = async (req, res, next) => {
   const { clave, password } = req.body;
-  console.log(req.body)
-  // Validate emil & password
+  
+  // Validate email & password
   if (!clave || !password) {
-    return res.status(401);
+    return res.status(400).json({ success: false, message: 'Please provide both clave and password.' });
   }
 
-  // Check for user
-  const user = await User.find({ clave:clave }).select('password');
-  const jwtuser = await User.find({ clave:clave }).select('clave');
-  const jwtuserst = jwtuser[0].clave
-  console.log(jwtuser)
-  if (!user) {
-    return res.status(401);
-  }
+  try {
+    // Check for user
+    const user = await User.findOne({ clave: clave }).select('password');
 
-  // Check if password matches
-  const isMatch = await bcrypt.compare(password, user[0].password);
-  console.log(isMatch)
-  if (!isMatch) {
-    return res.status(401);
+    if (!user) {
+      return res.status(401).json({ success: false, message: 'Invalid credentials.' });
+    }
+
+    // Check if password matches
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: 'Invalid credentials.' });
+    }
+
+    sendTokenResponse(clave, 200, res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'An error occurred while processing your request.' });
   }
-console.log(jwtuserst)
-  sendTokenResponse(jwtuserst, 200, res)
-}
+};
+
 // @desc      Log user out / clear cookie
 // @route     GET /api/v1/auth/logout
 // @access    Private
