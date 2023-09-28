@@ -130,3 +130,36 @@ exports.deleteRequisicion = async (req, res) => {
     });
   }
 };
+exports.updateAceptado = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { aceptado } = req.body;
+
+    // Find the Requisicion document based on the provided IP address
+    const requisicion = await RequisicionList.findOne({ _id: id });
+
+    if (!requisicion) {
+      return res.status(404).json({
+        success: false,
+        error: 'Requisicion not found',
+      });
+    }
+
+    // Update the 'aceptado' field with the provided value
+    requisicion.aceptado = aceptado;
+
+    // Save the updated document
+    await requisicion.save();
+
+    res.status(200).json({
+      success: true,
+      data: requisicion,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      error: 'Server Error',
+    });
+  }
+};
