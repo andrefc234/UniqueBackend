@@ -10,6 +10,6 @@ router.route('/:id')
   .get(getRequisicionById)
   .put(updateRequisicion)
   .delete(deleteRequisicion);
-router.put('/update/:ip', updateAceptado);
+router.put('/update/:id', updateAceptado);
 router.post('/upload/:requisicionId', upload.single('pdf'), uploadPDF);
 module.exports = router;
